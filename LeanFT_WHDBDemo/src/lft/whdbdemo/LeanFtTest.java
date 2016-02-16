@@ -12,6 +12,11 @@ import com.hp.lft.verifications.*;
 import com.hp.lft.sdk.web.*;
 import unittesting.*;
 
+/**
+ * 
+ * @author droukman
+ *
+ */
 public class LeanFtTest extends UnitTestClassBase {
 
 	private Browser browser;
