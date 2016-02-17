@@ -1,4 +1,4 @@
-package lft.whdbdemo;
+package lft.wdhbdemo;
 
 import static org.junit.Assert.*;
 
@@ -54,14 +54,20 @@ public class LeanFtTest extends UnitTestClassBase {
 	
 	@Test
 	public void selectMenuItem() throws GeneralLeanFtException {
-		browser.describe(Link.class, new LinkDescription.Builder()
-				.tagName("A").innerText("For patients and visitors  ").build()).hoverTap();
 		
-		browser.describe(Link.class, new LinkDescription.Builder()
-				.tagName("A").innerText("Visiting patients").index(0).build()).click();
+		EditField search =  browser.describe(EditField.class, new EditFieldDescription.Builder()
+				.type("search").tagName("INPUT").name("Search").build());
 		
-		WebElement header = browser.describe(WebElement.class, new WebElementDescription.Builder()
-				.tagName("H1").innerText("Visiting patients").build());
+		Button submit = browser.describe(Button.class, new ButtonDescription.Builder()
+				.buttonType("submit").tagName("INPUT").build());
+		
+		search.setValue("visiting patients");
+		submit.click();
+
+		browser.sync();
+		
+		Link header = browser.describe(Link.class, new LinkDescription.Builder()
+				.tagName("A").innerText("Visiting patients ").index(1).build());
 		
 		assertEquals(header.getInnerText(), "Visiting patients");
 	}
